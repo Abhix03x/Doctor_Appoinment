@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
-
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 
@@ -13,6 +14,7 @@ public class AppointmentController : ControllerBase
         _service=service;
     }
 
+    // [Authorize]
     [HttpPost("book")]
     public async Task<IActionResult> Book(AppointmentDto dto)
     {

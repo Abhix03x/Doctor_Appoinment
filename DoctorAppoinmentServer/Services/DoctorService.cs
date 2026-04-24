@@ -7,8 +7,13 @@ public class DoctorService
         _repo = repo;
     }
 
-    public async Task<IEnumerable<Doctor>> GetDoctors()
+    public async Task<IEnumerable<Doctor>> GetDoctors(string specialization)
     {
-        return await _repo.GetAll();
+        return await _repo.GetAll(specialization);
+    }
+
+    public async Task<IEnumerable<string>> GetSpecialization()
+    {
+        return await _repo.GetSpec();
     }
 }

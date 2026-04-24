@@ -13,9 +13,16 @@ public class DoctorController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> Get(string specialization)
     {
-        var doctors = await _service.GetDoctors();
+        var doctors = await _service.GetDoctors(specialization);
+        Console.WriteLine( specialization);
         return Ok(doctors);
+    }
+    [HttpGet("specialization")]
+    public async Task<IActionResult> Specialization()
+    {
+        var specialization = await _service.GetSpecialization();
+        return Ok(specialization);
     }
 }

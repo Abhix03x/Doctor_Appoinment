@@ -10,13 +10,16 @@ public class AppointmentService
 
     public async Task<string> BookAppointment(AppointmentDto dto)
     {
-        if(dto.AppointmentDate<DateTime.Now)
-            return "Cannot Book past appointments";
+        if(dto.AppointmentDate<DateTime.Now){
+            return BadRequest(new { message="Cannot Book past appointments"});
+        }
         var exists = await _repo.IsSlotTaken(dto.DoctorId,dto.AppointmentDate);
         if (exists)
-            return "This slot is already booked";
+        {
+            return Conflict(new {message ="This slot is already booked" }) ;
+        }  
         await _repo.Create(dto);
 
-        return "Appointment booked Successfully";
+        return Ok("Appointment booked Successfully");
     }
 }
