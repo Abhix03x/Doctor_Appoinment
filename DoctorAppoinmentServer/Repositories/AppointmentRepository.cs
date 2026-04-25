@@ -34,4 +34,42 @@ public class AppointmentRepository
 
         return count>0;
     }
+
+    public async Task<IEnumerable<Appointment>> GetAll()
+    {
+        using var connection = _context.CreateConnection();
+        return await connection.QueryAsync<Appointment>("Select * from Appointments");
+    }
+
+    public async Task<Appointment> GetById(int id)
+    {
+        using var connection = _context.CreateConnection();
+        return await connection.QueryFirstOrDefaultAsync<Appointment>(
+            "Select * from Appointments where Id = @Id",new{Id=id}
+        );
+    }
+
+    public async Task UpdateStatus(int id,string status)
+    {
+        using var connection = _context.CreateConnection();
+        await connection.ExecuteAsync(
+            "Update Appointments set Status = @Status where Id = @Id ",new{Status = status,Id=id}
+        );
+    }
+
+    public async Task Delete(int id)
+    {
+         using var connection = _context.CreateConnection();
+        await connection.ExecuteAsync(
+            "Delete from Appointments where Id = @Id ",new{Id=id}
+        );
+    }
+
+    public async Task<IEnumerable<Appointment>> Pending()
+    {
+        using var connection = _context.CreateConnection();
+        return await connection.QueryAsync<Appointment>(
+            "Select * from Appointments Where Status = @status",new{status ="pending"}
+        );
+    }
 }
