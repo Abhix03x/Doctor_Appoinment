@@ -8,18 +8,30 @@ public class AppointmentService
         _repo=repo;
     }
 
-    public async Task<string> BookAppointment(AppointmentDto dto)
+    public async Task<ServiceResult> BookAppointment(AppointmentDto dto)
     {
         if(dto.AppointmentDate<DateTime.Now){
-            return BadRequest(new { message="Cannot Book past appointments"});
+            return new ServiceResult
+            {
+                Success = false,
+                Message = "Cannot Book past appointments"
+            };
         }
         var exists = await _repo.IsSlotTaken(dto.DoctorId,dto.AppointmentDate);
         if (exists)
         {
-            return Conflict(new {message ="This slot is already booked" }) ;
+            return new ServiceResult
+            {
+                Success = false,
+                Message = "This slot is already booked"
+            };
         }  
         await _repo.Create(dto);
 
-        return Ok("Appointment booked Successfully");
+        return new ServiceResult
+            {
+                Success = true,
+                Message = "Appointment booked Successfully"
+            };
     }
 }

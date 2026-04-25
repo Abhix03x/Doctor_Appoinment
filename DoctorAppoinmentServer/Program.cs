@@ -4,6 +4,9 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
+JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.Clear();
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -18,7 +21,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
          ValidateIssuerSigningKey = true, 
          IssuerSigningKey = key,
          ValidateIssuer = false,
-         ValidateAudience = false
+         ValidateAudience = false,
+         //for role based login for admin
+         RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
      };
  });
 
@@ -51,11 +56,12 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.MapControllers();
+
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllers();
 
 
 

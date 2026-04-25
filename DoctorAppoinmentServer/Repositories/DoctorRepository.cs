@@ -21,4 +21,37 @@ public class DoctorRepository
         using var connection = _context.CreateConnection();
         return await connection.QueryAsync<string>(query);
     }
+
+    public async Task<IEnumerable<Doctor>> Get()
+    {
+        var query = "Select * From Doctors";
+        using var connection = _context.CreateConnection();
+        return await connection.QueryAsync<Doctor>(query);
+    }
+
+    public async Task<Doctor> GetById(int id)
+    {
+        using var connection = _context.CreateConnection();
+        return await connection.QueryFirstOrDefaultAsync<Doctor>(
+            "Select * from Doctors where Id = @Id",new{Id=id}
+        );
+    }
+
+    public async Task Delete(int id)
+    {
+        using var connection = _context.CreateConnection();
+        await connection.ExecuteAsync(
+            "Delete from Doctors where Id = @Id",new{Id=id}
+        );
+    }
+
+    public async Task Add(Doctor doctor)
+    {
+        using var connection = _context.CreateConnection();
+        await connection.ExecuteAsync(
+            @"Insert into Doctors (Name,Specialization,AvailableFrom,AvailableTo) 
+            values (@Name,@Specialization,@AvailableFrom,@AvailableTo)",doctor
+        );
+    }
+
 }

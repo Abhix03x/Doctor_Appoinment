@@ -19,9 +19,11 @@ public class AppointmentController : ControllerBase
     public async Task<IActionResult> Book(AppointmentDto dto)
     {
         var result = await _service.BookAppointment(dto);
-        if(result.Contains("Cannot")||result.Contains("already"))
-            return BadRequest(result);
-        return Ok(result);
+        if (!result.Success)
+        {
+            return BadRequest(new{message= result.Message});
+        }
+        return Ok(new {message = result.Message});
     }
 
 }
