@@ -5,6 +5,7 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Dashboard from './Pages/Dashboard';
 import Doctors from './Pages/Doctors';
+import Admin from './Pages/Admin';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path='/register' element={<Register/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/doctors/:specialization' element={<Doctors/>}/>
+          <Route path='/admin-dashboard' element={<Admin/>}/>
         </Routes>
       </BrowserRouter>
     </>

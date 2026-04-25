@@ -12,6 +12,7 @@ const Doctors = () => {
   // console.log(specialization);
 
   const handleAppointment = async () =>{
+    setError("");
     try{
        await axiosInstance.post(Api_Paths.Appointment.Book_Appointment,{
         doctorId:selectedDoctor.id,
@@ -24,9 +25,10 @@ const Doctors = () => {
 
     }catch(err){
       console.log(err.response)
-      setError(err.response?.data || "something went wrong");
+      const msg = err.response?.data?.message || "something went wrong";
+      setError(msg);
 
-      alert(error)
+     
     }
   }
 
@@ -60,6 +62,7 @@ const Doctors = () => {
         {selectedDoctor && (
           <div>
             <h3>Booking for Dr. {selectedDoctor.name}</h3>
+             {error && <p style={{ color: "red" }}>{error}</p>}
              <input 
               type='datetime-local'
               value={datetime}

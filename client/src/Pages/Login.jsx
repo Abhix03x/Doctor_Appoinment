@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
 import { Api_Paths } from '../Services/apiPath.js';
 import axiosInstance from '../Services/axios.js';
+import {jwtDecode} from "jwt-decode";
 
 const Login = () => {
 
@@ -37,7 +38,16 @@ const Login = () => {
 
       if(token){
         localStorage.setItem("token",token);
-        navigate("/dashboard");
+        const decoded = jwtDecode(token);
+
+        // const role = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+        console.log(decoded)
+        if(decoded.role ==="Admin"){
+          navigate("/admin-dashboard");
+        }else{
+           navigate("/dashboard");
+        }
+       
       }
     }catch(error){
       setError(error.message);
