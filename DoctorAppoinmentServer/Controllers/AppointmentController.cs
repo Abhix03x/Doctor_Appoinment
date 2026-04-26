@@ -18,6 +18,8 @@ public class AppointmentController : ControllerBase
     [HttpPost("book")]
     public async Task<IActionResult> Book(AppointmentDto dto)
     {
+        var patientId = int.Parse(User.FindFirst("id")?.Value);
+        dto.PatientId = patientId;
         var result = await _service.BookAppointment(dto);
         if (!result.Success)
         {

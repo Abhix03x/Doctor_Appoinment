@@ -46,6 +46,8 @@ builder.Services.AddScoped<AppointmentRepository>();
 builder.Services.AddScoped<AppointmentService>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<PatientRepository>();
+builder.Services.AddScoped<PatientService>();
 builder.Services.AddScoped<JwtHelper>();
 
 var app = builder.Build();

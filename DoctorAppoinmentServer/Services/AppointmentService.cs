@@ -34,7 +34,7 @@ public class AppointmentService
                 Message = "Appointment booked Successfully"
             };
     }
-    public async Task<IEnumerable<Appointment>> GetAppointment()
+    public async Task<IEnumerable<AppointmentResponseDto>> GetAppointment()
     {
         return await _repo.GetAll();
     }

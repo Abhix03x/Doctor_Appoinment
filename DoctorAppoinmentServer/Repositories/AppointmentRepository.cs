@@ -35,10 +35,14 @@ public class AppointmentRepository
         return count>0;
     }
 
-    public async Task<IEnumerable<Appointment>> GetAll()
+    public async Task<IEnumerable<AppointmentResponseDto>> GetAll()
     {
+        var query = @"
+        select a.id ,a.AppointmentDate,a.Status,u.Name as PatientName,d.Name as DoctorName 
+        from Appointments a JOIN Users u ON a.PatientId = u.Id
+        JOIN Doctors d ON a.DoctorId = d.Id";
         using var connection = _context.CreateConnection();
-        return await connection.QueryAsync<Appointment>("Select * from Appointments");
+        return await connection.QueryAsync<AppointmentResponseDto>(query);
     }
 
     public async Task<Appointment> GetById(int id)
