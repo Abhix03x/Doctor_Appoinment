@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import {BrowserRouter,Routes,Route,Navigate} from "react-router-dom"; 
-import './App.css'
+import './App.css';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Dashboard from './Pages/Dashboard';
 import Doctors from './Pages/Doctors';
 import Admin from './Pages/Admin';
+import Appointment from './Pages/Admin/Appointment';
+import Doctor from './Pages/Admin/Doctor';
+import Patient from './Pages/Admin/Patient';
 
 function App() {
 
@@ -19,6 +22,10 @@ function App() {
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/doctors/:specialization' element={<Doctors/>}/>
           <Route path='/admin-dashboard' element={<Admin/>}/>
+          <Route path='/admin/appointment' element={<Appointment/>}/>
+          <Route path='/admin/doctor' element={<Doctor/>}/>
+          <Route path='/admin/patient' element={<Patient/>}/>
+
         </Routes>
       </BrowserRouter>
     </>

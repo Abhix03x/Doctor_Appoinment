@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../Services/axios';
 import { Api_Paths } from '../Services/apiPath';
+import Navbar from '../Components/Navbar';
 
 const Dashboard = () => {
 
@@ -17,7 +18,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      Dashboard
+      <Navbar/>
       <h2>Specializations</h2>
       {specialization.map((spec,index) =>(
         <div key={index}>
