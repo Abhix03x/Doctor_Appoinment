@@ -10,8 +10,8 @@ export const Api_Paths ={
         GetSpecialization:"/api/doctor/specialization"
     },
     Appointment : {
-        Book_Appointment:"/api/appointment/book"
-
+        Book_Appointment:"/api/appointment/book",
+        Get_Patient_Appointments:"/api/appointment/myappointment"
     },
     Admin:{
         Get_Appointments:"/api/appointment",
@@ -22,7 +22,8 @@ export const Api_Paths ={
         Delete_doctor:(id)=>`/api/doctor/${id}`,
         Add_Doctor:"/api/doctor",
         Get_patient:"/api/patient",
-        Delete_Patient:(id) =>`/api/patient/${id}`
+        Delete_Patient:(id) =>`/api/patient/${id}`,
+        
     }
 
 };  

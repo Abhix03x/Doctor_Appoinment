@@ -76,4 +76,21 @@ public class AppointmentRepository
             "Select * from Appointments Where Status = @status",new{status ="pending"}
         );
     }
+
+    public async Task<IEnumerable<PatientAppointmentDto>> GetByPatientId(int patientId)
+    {
+    var query = @"
+        SELECT 
+            a.Id,
+            a.AppointmentDate,
+            a.Status,
+            d.Name AS DoctorName,
+            d.Specialization
+        FROM Appointments a
+        JOIN Doctors d ON a.DoctorId = d.Id
+        WHERE a.PatientId = @PatientId
+    ";
+    using var connection = _context.CreateConnection();
+    return await connection.QueryAsync<PatientAppointmentDto>(query, new { PatientId = patientId });
+    }
 }

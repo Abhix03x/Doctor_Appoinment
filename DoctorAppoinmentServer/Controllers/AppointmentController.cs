@@ -64,4 +64,13 @@ public class AppointmentController : ControllerBase
         var pending = await _service.GetPending();
         return Ok(pending);
     }
+
+    [HttpGet("myappointment")]
+    [Authorize]
+    public async Task<IActionResult> GetMyAppointments()
+    {
+        var id = int.Parse(User.FindFirst("id")?.Value);
+        var Appointment = await _service.GetMyAppointments(id);
+        return Ok(Appointment);
+    }
 }

@@ -9,6 +9,7 @@ import Admin from './Pages/Admin';
 import Appointment from './Pages/Admin/Appointment';
 import Doctor from './Pages/Admin/Doctor';
 import Patient from './Pages/Admin/Patient';
+import BookedAppointment from './Pages/BookedAppointment';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path='/register' element={<Register/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/doctors/:specialization' element={<Doctors/>}/>
+          <Route path='/myAppointments' element={<BookedAppointment/>}/>
           <Route path='/admin-dashboard' element={<Admin/>}/>
           <Route path='/admin/appointment' element={<Appointment/>}/>
           <Route path='/admin/doctor' element={<Doctor/>}/>

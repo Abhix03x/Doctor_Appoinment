@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const LinkClass = ({ isActive }) =>
     isActive
-      ? "text-white font-semibold border-b-2 border-white pb-1"
+      ? "text-green-500 font-semibold border-b-2 border-greeen-500 pb-1"
       : "text-blue-100 hover:text-white transition duration-200";
   
       const handleLogout =() =>{
@@ -22,23 +22,27 @@ const Navbar = () => {
     <div>
       <nav className="bg-blue-700 px-8 py-4 flex items-center justify-between shadow-md">
         <div className="text-white text-xl font-bold tracking-wide">
-          Doc<span className="text-blue-200 ">Book</span>
+          Doc<span className="text-green-200 ">Book</span>
         </div>
 
         <div className="flex items-center gap-8">
-          <NavLink to="/admin-dashboard" className={LinkClass}>
-            Dashboard
-          </NavLink>
+          
 
           {role == "Patient" && (
             <>
-              <NavLink to="/appointments" className={LinkClass}>
+              <NavLink to="/dashboard" className={LinkClass}>
+            Dashboard
+          </NavLink>
+              <NavLink to="/myAppointments" className={LinkClass}>
                 My Appointments
               </NavLink>
             </>
           )}
           {role == "Admin" && (
             <>
+            <NavLink to="/admin-dashboard" className={LinkClass}>
+            Dashboard
+          </NavLink>
               <NavLink to="/admin/appointment" className={LinkClass}>
                 Appointments
               </NavLink>

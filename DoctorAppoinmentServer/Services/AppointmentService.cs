@@ -60,4 +60,9 @@ public class AppointmentService
     {
         return await _repo.Pending();
     }
+
+    public async Task<IEnumerable<PatientAppointmentDto>> GetMyAppointments(int id)
+    {
+        return await _repo.GetByPatientId(id);
+    }
 }
